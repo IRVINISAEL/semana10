@@ -1,0 +1,4 @@
+evidence/*.json
+node_modules/
+.env*
+!.env.example

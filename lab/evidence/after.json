@@ -1,0 +1,78 @@
+{
+  "generatedAt": "2026-11-10T00:02:48.105Z",
+  "module": "C:\\Users\\irvin\\Downloads\\PWA-semana-10-laboratorio-estudiante\\lab\\src\\implementation.mjs",
+  "moduleSha256": "e7d316d193e915b96a9e02ee59f5d9cf644bddfac402aa864da791859767b2b4",
+  "gradingPerformed": false,
+  "modelInferencePerformed": false,
+  "releaseSimulationOnly": true,
+  "results": [
+    {
+      "id": "C-01",
+      "incident": "contrato",
+      "name": "Acepta un borrador sustentado",
+      "status": "passed"
+    },
+    {
+      "id": "C-02",
+      "incident": "contrato",
+      "name": "Rechaza cita inventada aunque el JSON tenga estructura válida",
+      "status": "passed"
+    },
+    {
+      "id": "C-03",
+      "incident": "contrato",
+      "name": "Rechaza referencia inexistente y forma inválida",
+      "status": "passed"
+    },
+    {
+      "id": "D-01",
+      "incident": "datos",
+      "name": "Generar no guarda sin confirmación ni altera observaciones/notas",
+      "status": "passed"
+    },
+    {
+      "id": "D-02",
+      "incident": "datos",
+      "name": "Caída del proveedor conserva contenido manual y guardado anterior",
+      "status": "passed"
+    },
+    {
+      "id": "R-01",
+      "incident": "concurrencia",
+      "name": "Respuesta de revisión anterior no sobrescribe edición reciente",
+      "status": "passed"
+    },
+    {
+      "id": "R-02",
+      "incident": "concurrencia",
+      "name": "Dos solicitudes: gana la vigente, no la que termina al final",
+      "status": "passed"
+    },
+    {
+      "id": "R-03",
+      "incident": "concurrencia",
+      "name": "Fallo antiguo no cambia el estado de una respuesta nueva lista",
+      "status": "passed"
+    },
+    {
+      "id": "L-01",
+      "incident": "release",
+      "name": "Recuperar mantiene datos pendientes y coherencia servidor/worker/shell",
+      "status": "passed"
+    },
+    {
+      "id": "L-02",
+      "incident": "release",
+      "name": "No recuperar si faltan assets; conservar estado anterior al rechazo",
+      "status": "passed"
+    },
+    {
+      "id": "L-03",
+      "incident": "release",
+      "name": "No retroceder a código incompatible con esquema actual",
+      "status": "passed"
+    }
+  ],
+  "passed": 11,
+  "total": 11
+}

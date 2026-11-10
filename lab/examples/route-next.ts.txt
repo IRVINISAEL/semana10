@@ -1,0 +1,27 @@
+// Fragmento de adaptación a App Router. NO es un archivo listo para copiar sin conectar dependencias.
+// Los imports de sesión/repositorio/proveedor son interfaces de SU proyecto, no módulos del kit.
+import 'server-only';
+import { requireSession } from '@/lib/auth';
+import { getInspectionForUser } from '@/lib/repository';
+import { provider } from '@/lib/ai/provider';
+import { validateDraft } from '@/lib/ai/contracts';
+
+export async function POST(request: Request) {
+  const session = await requireSession(); // autorización server-side
+  const body = await request.json(); // añadir límites de cuerpo y esquema antes de despliegue
+  if (typeof body.inspectionId !== 'string') return Response.json({error:'INVALID_INPUT'}, {status:400});
+  const inspection = await getInspectionForUser(body.inspectionId, session.userId);
+  if (!inspection) return Response.json({error:'NOT_FOUND'}, {status:404});
+  try {
+    // Provider configurado SOLO en servidor; instrucciones/versiones elegidas por servidor.
+    const raw = await provider.generate(inspection);
+    const draft = validateDraft(raw, inspection);
+    // Generar no confirma ni reemplaza las observaciones originales.
+    return Response.json({draft, sourceRevision:inspection.revision}, {headers:{'Cache-Control':'no-store'}});
+  } catch {
+    return Response.json({error:'GENERATION_UNAVAILABLE',manualEntryAvailable:true}, {status:502});
+  }
+}
+// Este fragmento no implementa persistencia, confirmación transaccional, CSRF, cuotas,
+// control de concurrencia completo, timeout ni límites de bytes. Adaptar según arquitectura.
+// No trasladar el Map del laboratorio a un deployment con varias instancias.

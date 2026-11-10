@@ -1,0 +1,22 @@
+name: Laboratorio semana 10 - feedback
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Si copia el lab en subdirectorio de su PWA, ajuste working-directory en ambos pasos.
+      - run: node scripts/evaluate.mjs --out evidence/after.json
+      - run: node --test tests/*.test.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: diagnostico-w10
+          path: evidence/*.json
+          if-no-files-found: warn
