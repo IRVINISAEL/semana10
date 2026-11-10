@@ -23,11 +23,11 @@ Material formativo dentro de actividad 10. No añade puntos ni otra entrega. Enl
 
 - Contribución técnica y enlace a código, prueba, depuración o revisión sustantiva: Corregí lab/src/implementation.mjs y ejecuté los reportes before.json y after.json.
 - Responsabilidad inicial y rotación: Me tocó la implementación del parche en implementation.mjs. Durante la sesión rotamos tareas y también ayudé a verificar los resultados.
-- Incidente y decisión propia: Incidente R. Decidí que una respuesta de la IA solo se guarda si la revisión y el número de solicitud siguen siendo los mismos que cuando empezó, para que una respuesta vieja no pise una edición o una solicitud nueva.
+- Incidente y decisión propia: Incidente C. Decidí que cada hallazgo solo se acepta si apunta a una observación que existe y su cita aparece literalmente en el texto de esa observación, y que una cita vacía se rechaza, para que el JSON válido no deje pasar contenido inventado.
 - Predicción antes de ejecutar: Esperaba 1/11 antes de corregir y 11/11 después.
 - Preparación y comando exacto: Desde lab/ con Node 22: node scripts/evaluate.mjs --out evidence/after.json y node --test tests/*.test.mjs
 - Resultado observado y enlace a prueba/reporte: Salió 1/11 antes y 11/11 después; la suite dio 12 pass y 0 fail. Reportes en lab/evidence/.
-- Variante breve ejecutada y resultado, dentro del mismo incidente: Pendiente
+- Variante breve ejecutada y resultado, dentro del mismo incidente: Incidente C. Agregué C-04 en lab/tests/behavior.test.mjs: acepta una cita de O-2, rechaza una cita de O-1 atribuida a O-2 y rechaza una cita vacía. Resultado: 13 pass, 0 fail.
 - Qué demuestra y qué no demuestra: Demuestra que se cumplen las invariantes en el modelo del laboratorio. No demuestra que la PWA real, el build ni el navegador funcionen.
 - ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost. Navegador: no.
 - Limitación y siguiente verificación: Probar la actualización y recuperación en el navegador con la PWA del equipo, con el mismo origen.
