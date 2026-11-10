@@ -14,9 +14,9 @@ Material formativo dentro de actividad 10. No añade puntos ni otra entrega. Enl
 
 | Incidente | Hipótesis inicial | Invariante | Cambio y enlace | Caso ejecutado | Resultado observado | Límite |
 |---|---|---|---|---|---|---|
-| C | El validador solo revisa la forma del JSON, no si la cita existe | Cada hallazgo cita texto literal de una observación existente | validateDraft en lab/src/implementation.mjs | C-01 a C-03 | Pasaron | No prueba que todo resumen libre sea verdadero |
-| D | Generar borra los datos antes de llamar a la IA y guarda el reporte sin confirmar | Generar solo crea borrador y se conserva lo original | generateDraft ya no borra datos ni guarda el reporte | D-01, D-02 | Pasaron | Es un modelo en memoria |
-| R | Una respuesta vieja puede pisar una nueva | Una respuesta corresponde a una revisión y solicitud vigentes | commitDraft y failIfCurrent comparan revisión y requestId | R-01 a R-03 | Pasaron | Solo funciona dentro de un proceso |
+| C | El validador solo revisa la forma del JSON, no si la cita existe | Cada hallazgo cita texto literal de una observación existente | validateDraft en lab/src/implementation.mjs | C-01 a C-03 y C-04 | Pasaron | No prueba que todo resumen libre sea verdadero |
+| D | Generar borra los datos antes de llamar a la IA y guarda el reporte sin confirmar | Generar solo crea borrador y se conserva lo original | generateDraft ya no borra datos ni guarda el reporte | D-01, D-02 y D-04 |Pasaron | Es un modelo en memoria |
+| R | Una respuesta vieja puede pisar una nueva | Una respuesta corresponde a una revisión y solicitud vigentes | commitDraft y failIfCurrent comparan revisión y requestId | R-01 a R-03 y R-04 | Pasaron | Solo funciona dentro de un proceso |
 | L | La recuperación solo cambia serverVersion y borra los datos | Recuperar exige assets y esquema compatibles, y conserva los datos pendientes | recoverRelease valida antes de cambiar y alinea servidor, worker y shell | L-01 a L-03 | Pasaron | No es un navegador real |
 
 ## Integrante: Martinez Alejo Irvin Isael
@@ -26,40 +26,40 @@ Material formativo dentro de actividad 10. No añade puntos ni otra entrega. Enl
 - Incidente y decisión propia: Incidente C. Decidí que cada hallazgo solo se acepta si apunta a una observación que existe y su cita aparece literalmente en el texto de esa observación, y que una cita vacía se rechaza, para que el JSON válido no deje pasar contenido inventado.
 - Predicción antes de ejecutar: Esperaba 1/11 antes de corregir y 11/11 después.
 - Preparación y comando exacto: Desde lab/ con Node 22: node scripts/evaluate.mjs --out evidence/after.json y node --test tests/*.test.mjs
-- Resultado observado y enlace a prueba/reporte: Salió 1/11 antes y 11/11 después; la suite dio 13 pass y 0 fail (12 originales más mi variante C-04). Reportes en lab/evidence/.
-- Variante breve ejecutada y resultado, dentro del mismo incidente: Incidente C. Agregué C-04 en lab/tests/behavior.test.mjs: acepta una cita de O-2, rechaza una cita de O-1 atribuida a O-2 y rechaza una cita vacía. Resultado: 13 pass, 0 fail.
+- Resultado observado y enlace a prueba/reporte: Salió 1/11 antes y 11/11 después; la suite dio 15 pass y 0 fail con las variantes del equipo (12 originales más C-04, D-04 y R-04; la mía es C-04). Reportes en lab/evidence/.
+- Variante breve ejecutada y resultado, dentro del mismo incidente: Incidente C. Agregué C-04 en lab/tests/behavior.test.mjs: acepta una cita de O-2, rechaza una cita de O-1 atribuida a O-2 y rechaza una cita vacía. Resultado: pasó (suite completa del equipo: 15 pass, 0 fail).
 - Qué demuestra y qué no demuestra: Demuestra que se cumplen las invariantes en el modelo del laboratorio. No demuestra que la PWA real, el build ni el navegador funcionen.
 - ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost. Navegador: no.
 - Limitación y siguiente verificación: Probar la actualización y recuperación en el navegador con la PWA del equipo, con el mismo origen.
-- IA de desarrollo: Martinez Alejo Irvin Isael usó Claude (Anthropic) como apoyo para guiarse en la corrección de implementation.mjs, en la variante C-04 y en la redacción de esta evidencia. Verificó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y la suite de pruebas (13 pass, 0 fail), y revisando las aserciones de los casos.
+- IA de desarrollo: Martinez Alejo Irvin Isael usó Claude (Anthropic) como apoyo para guiarse en la corrección de implementation.mjs, en la variante C-04 y en la redacción de esta evidencia. Verificó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y la suite de pruebas (15 pass, 0 fail con las variantes del equipo), y revisando las aserciones de los casos.
 
 
 ## Integrante: Linares Cortés María José
 
-- Contribución técnica y enlace a código, prueba, depuración o revisión sustantiva: Participé en [diagnóstico / implementación / verificación] del laboratorio. Evidencia: lab/src/implementation.mjs y lab/evidence/after.json.
-- Responsabilidad inicial y rotación: Al inicio me tocó [diagnóstico / implementación / verificación] y después roté a [otra tarea] con [nombre del compañero].
-- Incidente y decisión propia: Incidente [D / R / L]. Decidí que [completar con una frase propia: qué debe cumplirse y por qué].
-- Predicción antes de ejecutar: Esperaba que antes de corregir fallaran los casos del incidente [D / R / L] y que después pasaran los 11/11.
+- Contribución técnica y enlace a código, prueba, depuración o revisión sustantiva: Escribí y ejecuté la variante D-04 en lab/tests/variante-maria.test.mjs y revisé las aserciones de los casos D-01 y D-02 en lab/tests/scenarios.mjs.
+- Responsabilidad inicial y rotación: Al inicio me tocó la verificación (correr las pruebas y revisar las aserciones) y después roté a escribir mi variante del incidente D.
+- Incidente y decisión propia: Incidente D. Decidí que generar un borrador nunca debe modificar las observaciones, las notas manuales ni un reporte ya confirmado, y que si el proveedor cae se pueda seguir trabajando a mano, para no perder datos por un fallo de la IA.
+- Predicción antes de ejecutar: Esperaba que D-01 y D-02 fallaran antes de corregir y pasaran después, y que mi variante D-04 pasara con la implementación corregida.
 - Preparación y comando exacto: Desde lab/ con Node 22: node scripts/evaluate.mjs --out evidence/after.json y node --test tests/*.test.mjs
-- Resultado observado y enlace a prueba/reporte: Antes 1/11 y después 11/11; la suite dio [número] pass y 0 fail. Reportes en lab/evidence/.
-- Variante breve ejecutada y resultado, dentro del mismo incidente: [nombre de mi variante y su resultado, o «pendiente»]
-- Qué demuestra y qué no demuestra: Demuestra que se cumplen las invariantes en el modelo del laboratorio. No demuestra que la PWA real, el build ni el navegador funcionen.
-- ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost [solo si ejecuté la suite]. Navegador: no.
-- Limitación y siguiente verificación: Probar la actualización y recuperación en el navegador con la PWA del equipo, con el mismo origen.
-- IA de desarrollo: Linares Cortés María José usó Claude (Anthropic) como apoyo para entender los incidentes y guiarse en la corrección y en la evidencia de este laboratorio. Validó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y node --test tests/*.test.mjs, y revisando las aserciones de los casos.
+- Resultado observado y enlace a prueba/reporte: Antes 1/11 y después 11/11; la suite dio 15 pass y 0 fail con las variantes del equipo. Reportes en lab/evidence/.
+- Variante breve ejecutada y resultado, dentro del mismo incidente: Incidente D. D-04: tras generar y confirmar un reporte, el proveedor cae; se conserva el reporte confirmado y las notas, aiState queda en error y se puede editar a mano. Resultado: pasó.
+- Qué demuestra y qué no demuestra: Demuestra que, en el modelo en memoria, una caída del proveedor no destruye datos confirmados ni impide continuar manualmente. No demuestra que la PWA real, el build ni el navegador funcionen.
+- ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost al correr la suite. Navegador: no.
+- Limitación y siguiente verificación: El almacén es un Map en memoria, no IndexedDB. Siguiente verificación: probar la caída del proveedor en la PWA real con el mismo origen.
+- IA de desarrollo: Linares Cortés María José usó Claude (Anthropic) como apoyo para entender los incidentes y obtener la variante D-04 y la redacción de esta evidencia. Validó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y node --test tests/*.test.mjs, y revisando las aserciones de los casos.
 
 ## Integrante: Martínez Bolaños German Yair
 
-- Contribución técnica y enlace a código, prueba, depuración o revisión sustantiva: Participé en [diagnóstico / implementación / verificación] del laboratorio. Evidencia: lab/src/implementation.mjs y lab/evidence/after.json.
-- Responsabilidad inicial y rotación: Al inicio me tocó [diagnóstico / implementación / verificación] y después roté a [otra tarea] con [nombre del compañero].
-- Incidente y decisión propia: Incidente [D / R / L]. Decidí que [completar con una frase propia: qué debe cumplirse y por qué].
-- Predicción antes de ejecutar: Esperaba que antes de corregir fallaran los casos del incidente [D / R / L] y que después pasaran los 11/11.
+- Contribución técnica y enlace a código, prueba, depuración o revisión sustantiva: Escribí y ejecuté la variante R-04 en lab/tests/variante-german.test.mjs y revisé las aserciones de los casos R-01 a R-03 en lab/tests/scenarios.mjs.
+- Responsabilidad inicial y rotación: Al inicio me tocó el diagnóstico (leer los casos fallidos y la causa raíz) y después roté a escribir mi variante del incidente R.
+- Incidente y decisión propia: Incidente R. Decidí que una respuesta solo debe aplicarse si la revisión y la solicitud siguen siendo las mismas, y que una edición posterior invalida un borrador listo para que no se confirme contenido desactualizado.
+- Predicción antes de ejecutar: Esperaba que R-01 a R-03 fallaran antes de corregir y pasaran después, y que mi variante R-04 pasara con la implementación corregida.
 - Preparación y comando exacto: Desde lab/ con Node 22: node scripts/evaluate.mjs --out evidence/after.json y node --test tests/*.test.mjs
-- Resultado observado y enlace a prueba/reporte: Antes 1/11 y después 11/11; la suite dio [número] pass y 0 fail. Reportes en lab/evidence/.
-- Variante breve ejecutada y resultado, dentro del mismo incidente: [nombre de mi variante y su resultado, o «pendiente»]
-- Qué demuestra y qué no demuestra: Demuestra que se cumplen las invariantes en el modelo del laboratorio. No demuestra que la PWA real, el build ni el navegador funcionen.
-- ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost [solo si ejecuté la suite]. Navegador: no.
-- Limitación y siguiente verificación: Probar la actualización y recuperación en el navegador con la PWA del equipo, con el mismo origen.
-- IA de desarrollo: Martínez Bolaños German Yair usó Claude (Anthropic) como apoyo para entender los incidentes y guiarse en la corrección y en la evidencia de este laboratorio. Validó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y node --test tests/*.test.mjs, y revisando las aserciones de los casos.
+- Resultado observado y enlace a prueba/reporte: Antes 1/11 y después 11/11; la suite dio 15 pass y 0 fail con las variantes del equipo. Reportes en lab/evidence/.
+- Variante breve ejecutada y resultado, dentro del mismo incidente: Incidente R. R-04: se genera un borrador listo y luego se edita; el borrador se invalida (queda en null), confirmar lanza error y el reporte guardado sigue vacío. Resultado: pasó.
+- Qué demuestra y qué no demuestra: Demuestra que, en el modelo en memoria, una edición posterior vuelve obsoleto el borrador y no permite confirmarlo. No demuestra que la PWA real, el build ni el navegador funcionen.
+- ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost al correr la suite. Navegador: no.
+- Limitación y siguiente verificación: La comparación de revisión solo es atómica dentro de un proceso; en producción haría falta una transacción o versionado real. Siguiente verificación: repetirlo en la PWA real.
+- IA de desarrollo: Martínez Bolaños German Yair usó Claude (Anthropic) como apoyo para entender los incidentes y obtener la variante R-04 y la redacción de esta evidencia. Validó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y node --test tests/*.test.mjs, y revisando las aserciones de los casos.
 
 El evaluador no convierte este documento en puntos adicionales. El SHA final común se registra en Classroom después del último commit; no se intenta incluir dentro de ese mismo commit. La evidencia ambigua genera aclaración personal, no sanción automática al equipo.
