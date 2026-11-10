@@ -31,6 +31,35 @@ Material formativo dentro de actividad 10. No añade puntos ni otra entrega. Enl
 - Qué demuestra y qué no demuestra: Demuestra que se cumplen las invariantes en el modelo del laboratorio. No demuestra que la PWA real, el build ni el navegador funcionen.
 - ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost. Navegador: no.
 - Limitación y siguiente verificación: Probar la actualización y recuperación en el navegador con la PWA del equipo, con el mismo origen.
-- IA de desarrollo: Usé Claude para guiarme paso a paso en la corrección de implementation.mjs. Verifiqué el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y la suite de pruebas (13 pass, 0 fail).
+- IA de desarrollo: Martinez Alejo Irvin Isael usó Claude (Anthropic) como apoyo para guiarse en la corrección de implementation.mjs, en la variante C-04 y en la redacción de esta evidencia. Verificó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y la suite de pruebas (13 pass, 0 fail), y revisando las aserciones de los casos.
+
+
+## Integrante: Linares Cortés María José
+
+- Contribución técnica y enlace a código, prueba, depuración o revisión sustantiva: Participé en [diagnóstico / implementación / verificación] del laboratorio. Evidencia: lab/src/implementation.mjs y lab/evidence/after.json.
+- Responsabilidad inicial y rotación: Al inicio me tocó [diagnóstico / implementación / verificación] y después roté a [otra tarea] con [nombre del compañero].
+- Incidente y decisión propia: Incidente [D / R / L]. Decidí que [completar con una frase propia: qué debe cumplirse y por qué].
+- Predicción antes de ejecutar: Esperaba que antes de corregir fallaran los casos del incidente [D / R / L] y que después pasaran los 11/11.
+- Preparación y comando exacto: Desde lab/ con Node 22: node scripts/evaluate.mjs --out evidence/after.json y node --test tests/*.test.mjs
+- Resultado observado y enlace a prueba/reporte: Antes 1/11 y después 11/11; la suite dio [número] pass y 0 fail. Reportes en lab/evidence/.
+- Variante breve ejecutada y resultado, dentro del mismo incidente: [nombre de mi variante y su resultado, o «pendiente»]
+- Qué demuestra y qué no demuestra: Demuestra que se cumplen las invariantes en el modelo del laboratorio. No demuestra que la PWA real, el build ni el navegador funcionen.
+- ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost [solo si ejecuté la suite]. Navegador: no.
+- Limitación y siguiente verificación: Probar la actualización y recuperación en el navegador con la PWA del equipo, con el mismo origen.
+- IA de desarrollo: Linares Cortés María José usó Claude (Anthropic) como apoyo para entender los incidentes y guiarse en la corrección y en la evidencia de este laboratorio. Validó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y node --test tests/*.test.mjs, y revisando las aserciones de los casos.
+
+## Integrante: Martínez Bolaños German Yair
+
+- Contribución técnica y enlace a código, prueba, depuración o revisión sustantiva: Participé en [diagnóstico / implementación / verificación] del laboratorio. Evidencia: lab/src/implementation.mjs y lab/evidence/after.json.
+- Responsabilidad inicial y rotación: Al inicio me tocó [diagnóstico / implementación / verificación] y después roté a [otra tarea] con [nombre del compañero].
+- Incidente y decisión propia: Incidente [D / R / L]. Decidí que [completar con una frase propia: qué debe cumplirse y por qué].
+- Predicción antes de ejecutar: Esperaba que antes de corregir fallaran los casos del incidente [D / R / L] y que después pasaran los 11/11.
+- Preparación y comando exacto: Desde lab/ con Node 22: node scripts/evaluate.mjs --out evidence/after.json y node --test tests/*.test.mjs
+- Resultado observado y enlace a prueba/reporte: Antes 1/11 y después 11/11; la suite dio [número] pass y 0 fail. Reportes en lab/evidence/.
+- Variante breve ejecutada y resultado, dentro del mismo incidente: [nombre de mi variante y su resultado, o «pendiente»]
+- Qué demuestra y qué no demuestra: Demuestra que se cumplen las invariantes en el modelo del laboratorio. No demuestra que la PWA real, el build ni el navegador funcionen.
+- ¿Se comprobó modelo/simulación, HTTP real o navegador? Distinga los tres: Modelo/simulación en memoria: sí. HTTP real: sí, smoke local en localhost [solo si ejecuté la suite]. Navegador: no.
+- Limitación y siguiente verificación: Probar la actualización y recuperación en el navegador con la PWA del equipo, con el mismo origen.
+- IA de desarrollo: Martínez Bolaños German Yair usó Claude (Anthropic) como apoyo para entender los incidentes y guiarse en la corrección y en la evidencia de este laboratorio. Validó el resultado ejecutando evaluate.mjs (1/11 antes y 11/11 después) y node --test tests/*.test.mjs, y revisando las aserciones de los casos.
 
 El evaluador no convierte este documento en puntos adicionales. El SHA final común se registra en Classroom después del último commit; no se intenta incluir dentro de ese mismo commit. La evidencia ambigua genera aclaración personal, no sanción automática al equipo.
